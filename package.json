@@ -1,0 +1,34 @@
+{
+  "name": "simple_seed",
+  "version": "0.0.1",
+  "description": "seed react",
+  "main": "gulpfile.js",
+  "private": "true",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^3.1.18",
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.4",
+    "del": "^1.2.0",
+    "eslint": "^0.23.0",
+    "eslint-plugin-react": "^2.5.2",
+    "esprima-fb": "^15001.1.0-dev-harmony-fb",
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^0.14.0",
+    "gulp-jscs": "^1.6.0",
+    "gulp-load-plugins": "^1.0.0-rc.1",
+    "gulp-size": "^1.2.2",
+    "gulp-useref": "^1.2.0",
+    "gulp-util": "^3.0.6",
+    "node-notifier": "^4.2.3",
+    "react": "^0.13.3",
+    "run-sequence": "^1.1.1",
+    "underscore": "^1.8.3",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.2.3"
+  }
+}
