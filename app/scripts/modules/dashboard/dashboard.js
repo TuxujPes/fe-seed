@@ -37,10 +37,10 @@ export default class DashboardPage extends React.Component {
         </div>
         <div>
           <Tabs>
-            <Tabs.Panel title='first one'>
+            <Tabs.Panel title="first one">
               <h2>FIRST</h2>
             </Tabs.Panel>
-            <Tabs.Panel title='second one'>
+            <Tabs.Panel title="second one">
               <h2>SECOND</h2>
             </Tabs.Panel>
           </Tabs>

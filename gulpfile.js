@@ -81,13 +81,10 @@ gulp.task('buildStyles', function() {
     .pipe($.if(!isProd, $.sourcemaps.init()))
     .pipe($.sass())
 
-    // todo: fix sourcemaps and autoprefixer issue
     // todo: clean this task minification process
-    // .pipe($.autoprefixer({browsers: ['> 5%', 'last 2 versions']}))
-    // .pipe($.concat(paths.cssOut))
+    .pipe($.autoprefixer({browsers: ['> 5%', 'last 2 versions']}))
     .pipe($.if(!isProd, $.sourcemaps.write()))
-
-    // .pipe($.if(isProd, minifycss()))
+    .pipe($.if(isProd, minifycss()))
     .pipe(gulp.dest(paths.cssBuildDir));
 });
 
