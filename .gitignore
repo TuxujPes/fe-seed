@@ -4,6 +4,7 @@ node_modules
 .c9
 *.css.map
 .DS_Store
+.idea
 
 dist/*
 build/*

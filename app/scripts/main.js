@@ -1,4 +1,7 @@
 import React from 'react';
-import IndexPage from './modules/index';
+import Router from 'react-router';
+import routes from './configs/routes';
 
-React.render(<IndexPage />, document.body);
+Router.run(routes, function onRootChange(Root) {
+  React.render(<Root />, document.getElementById('app'));
+});

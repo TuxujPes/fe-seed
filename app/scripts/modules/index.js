@@ -1,8 +1,14 @@
 import React from 'react';
+import {RouteHandler} from 'react-router';
 
 class IndexPage extends React.Component {
   render() {
-    return <p>Hello es2015 and React</p>;
+    return (
+      <div>
+        <p>index.js file</p>
+        <RouteHandler/>
+      </div>
+    );
   }
 }
 

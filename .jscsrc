@@ -1,6 +1,5 @@
 {
   "preset": "airbnb",
-  "esprima": "esprima-fb",
-  "fileExtensions": [".js", ".jsx"],
-  "validateLineBreaks": "CRLF"
+  "esnext": true,
+  "esprima": "esprima-fb"
 }

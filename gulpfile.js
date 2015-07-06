@@ -7,6 +7,11 @@ var source = require('vinyl-source-stream');
 var _ = require('underscore');
 var runSequence = require('run-sequence');
 var notifier = require('node-notifier');
+var minifycss = require('gulp-minify-css');
+
+// for mock requests
+var bodyParser = require('body-parser');
+var mockMiddleware = require('./mocks/mock_middleware');
 
 // gulp and gulp plugins
 var gulp = require('gulp');
@@ -21,23 +26,69 @@ paths.jsDir = './app/scripts';
 paths.jsFiles = paths.jsDir + '/**/*.js';
 paths.jsEntry = paths.jsDir + '/main.js';
 paths.jsOut = 'bundle.js';
+
+paths.scssDir = './app/styles';
+paths.scssFiles = paths.scssDir + '/**/*.scss';
+paths.scssEntry = paths.scssDir + '/main.scss';
+paths.cssOut = 'styles.css';
+
 paths.html = './app/index.html';
 paths.buildDir = isProd ? './dist' : './build';
-paths.styles = '/style';
+paths.cssBuildDir = paths.buildDir + '/styles';
 paths.script = '/scripts';
 
-// TASKS
+// MAIN TASKS
 gulp.task('default', ['build']);
-gulp.task('build', buildApplication);
-gulp.task('serve', ['browserifyWatch', 'appWatch']);
+/**
+ * run task in sequence:
+ * clear build folder then check style and only then build app
+ */
+gulp.task('build', function() {
+  runSequence(
+    'cleanBuildFolder',
+    'scriptsStyleguideFull',
+    ['buildHtml', 'buildStyles', 'buildScripts'],
+    notifySuccess);
+});
+/**
+* start web server and watchers to recompile on file changes
+*/
+gulp.task('serve', ['startDevServer', 'browserifyWatch', 'appWatch']);
 
+// SUB TASKS
 // clean folders
-gulp.task('delete_build', function() {
+gulp.task('cleanBuildFolder', function() {
   del(paths.buildDir);
 });
 
 gulp.task('appWatch', function() {
-  gulp.watch(paths.jsFiles, ['scripts_styleguide_brief']);
+  gulp.watch(paths.jsFiles, ['scriptsStyleguideBrief']);
+  gulp.watch(paths.scssFiles, ['buildStyles']);
+});
+
+gulp.task('startDevServer', function() {
+  gulp.src(paths.buildDir)
+    .pipe($.webserver({
+      port: 3000,
+      middleware: [bodyParser.json(), mockMiddleware],
+      livereload: true
+    }));
+});
+
+// CSS
+gulp.task('buildStyles', function() {
+  return gulp.src(paths.scssFiles)
+    .pipe($.if(!isProd, $.sourcemaps.init()))
+    .pipe($.sass())
+
+    // todo: fix sourcemaps and autoprefixer issue
+    // todo: clean this task minification process
+    // .pipe($.autoprefixer({browsers: ['> 5%', 'last 2 versions']}))
+    // .pipe($.concat(paths.cssOut))
+    .pipe($.if(!isProd, $.sourcemaps.write()))
+
+    // .pipe($.if(isProd, minifycss()))
+    .pipe(gulp.dest(paths.cssBuildDir));
 });
 
 // code healthiness
@@ -46,7 +97,7 @@ gulp.task('appWatch', function() {
  * should not take much time to run
  * use in watcher
  */
-gulp.task('scripts_styleguide_brief', function() {
+gulp.task('scriptsStyleguideBrief', function() {
   return gulp.src(paths.jsFiles).pipe($.jscs());
 });
 
@@ -55,7 +106,7 @@ gulp.task('scripts_styleguide_brief', function() {
  * takes quite some time due to babel parser
  * use in builds
  */
-gulp.task('scripts_styleguide_full', function() {
+gulp.task('scriptsStyleguideFull', function() {
   return gulp.src(paths.jsFiles)
     .pipe($.jscs())
     .pipe($.eslint())
@@ -89,7 +140,7 @@ var watchifyOptions = _.extend({
 var bundler = browserify(browserifyOptions);
 var watchBundler = watchify(browserify(watchifyOptions));
 
-gulp.task('browserifyBundle', function() {
+gulp.task('buildScripts', function() {
   return bundler.bundle()
     .pipe(source(paths.jsOut))
     .pipe(gulp.dest(paths.buildDir + paths.script));
@@ -116,19 +167,7 @@ watchBundler.on('time', function(time) {
 });
 
 /**
- * run task in sequence:
- * clear build folder then check style and only then build app
- */
-function buildApplication() {
-  runSequence(
-    'delete_build',
-    'scripts_styleguide_full',
-    ['buildHtml', 'browserifyBundle'],
-    notifySuccess);
-}
-
-/**
- * small popup with result of a build
+ * small desktop popup with result of a build
  */
 function notifySuccess(err) {
   notifier.notify({
