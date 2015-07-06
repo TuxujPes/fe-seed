@@ -1,7 +1,11 @@
 @import './base/reset';
 @import './base/theme';
+@import './components/tabs';
 @import './modules/dashboard/dashboard';
+@import './modules/bulletinboard/bulletinboard';
 
-body {
-  color: green;
+.index-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
 }

@@ -1,0 +1,17 @@
+.tabs {
+  display: flex;
+  flex-flow: column;
+
+  &-menu {
+    display: flex;
+    flex-flow: row;
+
+    &-item {
+      margin: 0 5px;
+
+      &.is-active a {
+        color: green;
+      }
+    }
+  }
+}

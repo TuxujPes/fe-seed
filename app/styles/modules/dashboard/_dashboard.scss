@@ -1,3 +1,12 @@
-.dashboard {
-  color: $color_primary
+.dashboard__overview-region {
+  display: flex;
+  flex-flow: row;
+  color: $color_primary;
+}
+
+.dashboard__navigation-region {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  background: #e9e9e9;
 }

@@ -1,12 +1,23 @@
 import React from 'react';
-import {Route, DefaultRoute} from 'react-router';
+import {Route, Redirect} from 'react-router';
 import IndexPage from './../modules/index';
-import AboutPage from './../modules/about';
-import WizardSteps from './../modules/wizard_steps/wizard_steps';
+import Dashboard from './../modules/dashboard/dashboard';
+import NamingGuidelines from './../modules/naming_guidelines/naming_guidelines';
+import ApprovedNames from './../modules/approved_names/approved_names';
+import CreateRequest from './../modules/create_request/create_request';
+import Requests from './../modules/requests/requests';
+import Reviews from './../modules/reviews/reviews';
+import Reports from './../modules/reports/reports';
 
 export default (
   <Route path="/" handler={IndexPage} >
-    <Route path="/" handler={WizardSteps}/>
-    <DefaultRoute handler={AboutPage}/>
+    <Route name="dashboard" path="/dashboard" handler={Dashboard} />
+    <Route name="naming-guidelines" path="/naming-guidelines" handler={NamingGuidelines} />
+    <Route name="approved-names" path="/approved-names" handler={ApprovedNames} />
+    <Route name="create-request" path="/create-request" handler={CreateRequest} />
+    <Route name="requests" path="/requests" handler={Requests} />
+    <Route name="reviews" path="/reviews" handler={Reviews} />
+    <Route name="reports" path="/reports" handler={Reports} />
+    <Redirect from="*" to="dashboard" />
   </Route>
 );
