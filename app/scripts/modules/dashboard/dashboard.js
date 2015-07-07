@@ -1,6 +1,6 @@
 import React from 'react';
-import Tabs from 'react-simpletabs';
-import Link from './../../components/huge_link/huge_link';
+import NavigationRegion from './navigation_region';
+import AtAGlance from './ataglance';
 
 const main = 'dashboard';
 const overviewRegion = main + '__overview-region';
@@ -9,7 +9,6 @@ const header = main + '__header';
 const infoWrapper = main + '__info';
 const infoParagraph = infoWrapper + '__paragraph';
 const bulletinBoard = 'bulletin-board';
-const dashboardNavigationRegion = main + '__navigation-region';
 
 export default class DashboardPage extends React.Component {
   render() {
@@ -27,24 +26,8 @@ export default class DashboardPage extends React.Component {
             BULLETINBOARD
           </div>
         </div>
-        <div className={dashboardNavigationRegion}>
-          <Link to={'naming-guidelines'} label={'Naming Guidelines'} />
-          <Link to={'approved-names'} label={'Approved Names'} />
-          <Link to={'create-request'} label={'Request a Name'} />
-          <Link to={'requests'} label={'My Request'} />
-          <Link to={'reviews'} label={'My Reviews'} />
-          <Link to={'reports'} label={'Reports'} />
-        </div>
-        <div>
-          <Tabs>
-            <Tabs.Panel title="first one">
-              <h2>FIRST</h2>
-            </Tabs.Panel>
-            <Tabs.Panel title="second one">
-              <h2>SECOND</h2>
-            </Tabs.Panel>
-          </Tabs>
-        </div>
+        <NavigationRegion />
+        <AtAGlance />
       </div>
     );
   }
