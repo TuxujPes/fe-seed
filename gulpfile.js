@@ -79,7 +79,7 @@ gulp.task('startDevServer', function() {
 gulp.task('buildStyles', function() {
   return gulp.src(paths.scssFiles)
     .pipe($.if(!isProd, $.sourcemaps.init()))
-    .pipe($.sass())
+    .pipe($.sass().on('error', $.sass.logError))
 
     // todo: clean this task minification process
     .pipe($.autoprefixer({browsers: ['> 5%', 'last 2 versions']}))
