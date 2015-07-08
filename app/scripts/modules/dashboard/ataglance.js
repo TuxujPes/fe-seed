@@ -36,9 +36,9 @@ export default class AtAGlance extends React.Component {
     });
 
     return (
-      <Tabs>
-        {tabs}
-      </Tabs>
+      <div className="ataglance-region">
+        <Tabs>{tabs}</Tabs>
+      </div>
     );
   }
 }

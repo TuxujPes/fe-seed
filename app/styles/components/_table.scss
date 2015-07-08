@@ -21,6 +21,10 @@
   &__header {}
 
   &__body &__row{
-    background: $color_table_body_row;
+    background: $color_table_body_row_primary;
+    
+    &:nth-child(even){
+      background: $color_table_body_row_secondary;
+    }
   }
 }

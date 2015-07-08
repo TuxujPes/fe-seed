@@ -1,7 +1,15 @@
-$color_primary: red;
+$grey: #ececec;
+$almost_black: #333;
+$white: white;
+$blue: #2EB1DE;
 
-$color_active_primary: #2EB1DE;
-$color_table_body_row: #ececec;
-$color_table_header_row: white;
+$color_font_primary: $almost_black;
+
+$color_link: $blue;
+$color_link_active: $blue;
+
+$color_table_body_row_primary: $grey;
+$color_table_body_row_secondary: darken($grey, 10%);
+$color_table_header_row: $white;
 
 $gap_regular: 10px;
