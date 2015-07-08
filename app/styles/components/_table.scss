@@ -1,0 +1,26 @@
+.table {
+  display: flex;
+  flex-direction: column;
+
+  &__row {
+    padding: 0 $gap_regular;
+
+    &-inner {
+      display: flex;
+    }
+  }
+  
+  &__cell {
+    display: flex;
+    flex: 1;
+    align-items: center;
+
+    &__text {}
+  }
+
+  &__header {}
+
+  &__body &__row{
+    background: $color_table_body_row;
+  }
+}
