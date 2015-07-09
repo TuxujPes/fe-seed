@@ -1,5 +1,6 @@
 {
   "preset": "airbnb",
   "esnext": true,
-  "esprima": "esprima-fb"
+  "esprima": "esprima-fb",
+  "validateLineBreaks": null
 }
