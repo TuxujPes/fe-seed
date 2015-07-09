@@ -1,0 +1,11 @@
+.ataglance-region {
+  // in order we trust
+  // 1: title
+  .table__cell:first-child { flex: 2; }
+  .table__cell:nth-child(2) {}
+  
+  .view-all-link {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

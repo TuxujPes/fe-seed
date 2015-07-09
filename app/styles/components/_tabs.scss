@@ -1,16 +1,26 @@
 .tabs {
   display: flex;
   flex-flow: column;
+  &-navigation {
+    margin-bottom: $gap_regular;
+  }
 
   &-menu {
     display: flex;
     flex-flow: row;
 
     &-item {
-      margin: 0 5px;
+      display: flex;
+      margin-right: $gap_regular;
+      
+      a {
+        padding: $gap_regular 0;
+        text-decoration: none;
+        text-transform: capitalize;
+      }
 
-      &.is-active a {
-        color: green;
+      &.is-active {
+        border-bottom: 7px solid $color_link_active;
       }
     }
   }
