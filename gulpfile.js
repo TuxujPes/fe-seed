@@ -36,6 +36,8 @@ paths.html = './app/index.html';
 paths.buildDir = isProd ? './dist' : './build';
 paths.cssBuildDir = paths.buildDir + '/styles';
 paths.script = '/scripts';
+paths.imgDir = './app/images';
+
 
 // MAIN TASKS
 gulp.task('default', ['build']);
@@ -119,6 +121,22 @@ gulp.task('buildHtml', function() {
     .pipe($.useref())
     .pipe(gulp.dest(paths.buildDir))
     .pipe($.size());
+});
+
+/*
+  IMAGES
+  optimizer 
+*/
+var optimizationConfig = {
+    optimizationLevel: 5,
+    progressive: true,
+    interlaced: true
+};
+
+gulp.task('imageOptimization', function(cb) {
+  gulp.src(paths.imgDir + '/*.*')
+  .pipe($.imageOptimization(optimizationConfig))
+  .pipe(gulp.dest(paths.buildDir +'/images')).on('end', cb).on('error', cb);
 });
 
 // BROWSERIFY
